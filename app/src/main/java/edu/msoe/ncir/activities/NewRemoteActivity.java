@@ -1,4 +1,4 @@
-package edu.msoe.ncir;
+package edu.msoe.ncir.activities;
 
 import android.app.AppComponentFactory;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import edu.msoe.ncir.R;
 
 public class NewRemoteActivity extends AppCompatActivity {
     public static final String EXTRA_REPLY = "com.example.android.wordlistsql.REPLY";

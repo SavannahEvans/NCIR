@@ -1,10 +1,12 @@
-package edu.msoe.ncir;
+package edu.msoe.ncir.database;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
 import java.util.List;
+
+import edu.msoe.ncir.models.Remote;
 
 /**
  * Provides data to the UI from the repository
@@ -21,8 +23,12 @@ public class RemoteViewModel extends AndroidViewModel {
         myRemotes = myRepository.getAll();
     }
 
-    LiveData<List<Remote>> getAllRemotes() {
+    public LiveData<List<Remote>> getAllRemotes() {
         return myRemotes;
+    }
+
+    public LiveData<List<Remote>> getRemotes(int deviceID) {
+        return myRepository.getAll(deviceID);
     }
 
     public void insert(Remote remote) {

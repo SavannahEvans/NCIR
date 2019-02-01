@@ -1,4 +1,4 @@
-package edu.msoe.ncir;
+package edu.msoe.ncir.models;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -16,11 +16,11 @@ public class Remote {
     private String name;
 
     @NonNull
-    @ColumnInfo(name = "device")
-    private String device;
+    @ColumnInfo(name = "device_id")
+    private int deviceID;
 
-    public Remote(@NonNull String device, @NonNull String name) {
-        this.device = device;
+    public Remote(@NonNull int deviceID, @NonNull String name) {
+        this.deviceID = deviceID;
         this.name = name;
     }
 
@@ -34,8 +34,12 @@ public class Remote {
     }
 
     @NonNull
-    public String getDevice() {
-        return this.device;
+    public int getDeviceID() {
+        return this.deviceID;
+    }
+
+    public void setDeviceID(int id) {
+        this.deviceID = id;
     }
 
     public int getId() {

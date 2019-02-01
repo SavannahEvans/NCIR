@@ -1,4 +1,4 @@
-package edu.msoe.ncir;
+package edu.msoe.ncir.database;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -6,6 +6,8 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
 import java.util.List;
+
+import edu.msoe.ncir.models.Remote;
 
 /**
  * DAO stands for data access object, this is where all SQL queries are built.
@@ -23,6 +25,9 @@ public interface RemoteDao {
     @Query("SELECT * from remote_table ORDER BY name ASC")
     LiveData<List<Remote>> getAll();
 
-    @Query("SELECT * from remote_table WHERE device LIKE :deviceName ORDER BY name ASC")
-    LiveData<List<Remote>> getAll(String deviceName);
+    @Query("SELECT * from remote_table WHERE device_id LIKE :deviceID ORDER BY name ASC")
+    LiveData<List<Remote>> getAll(int deviceID);
+
+    @Query("SELECT * from remote_table WHERE id LIKE :remoteID")
+    LiveData<Remote> get(int remoteID);
 }

@@ -1,5 +1,6 @@
-package edu.msoe.ncir;
+package edu.msoe.ncir.database;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
@@ -7,11 +8,16 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
-@Database(entities = {Remote.class}, version = 1, exportSchema = false)
+import edu.msoe.ncir.models.Device;
+import edu.msoe.ncir.models.Remote;
+
+@Database(entities = {Remote.class, Device.class}, version = 1, exportSchema = false)
 public abstract class RemoteRoomDatabase extends RoomDatabase {
 
     public abstract RemoteDao remoteDao();
+    public abstract DeviceDao deviceDao();
 
     private static volatile RemoteRoomDatabase INSTANCE;
 
@@ -42,15 +48,26 @@ public abstract class RemoteRoomDatabase extends RoomDatabase {
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
-        private final RemoteDao myDao;
+        private final RemoteDao myRemoteDao;
+        private final DeviceDao myDeviceDao;
 
         PopulateDbAsync(RemoteRoomDatabase db) {
-            myDao = db.remoteDao();
+            myRemoteDao = db.remoteDao();
+            myDeviceDao = db.deviceDao();
         }
 
+        /**
+         * Runs on application startup, usually used to reset data each restart
+         * WARNING: If models change the data must be deleted and recreated :)
+         */
         @Override
         protected Void doInBackground(final Void... params) {
-            myDao.deleteAll();
+            //myRemoteDao.deleteAll();
+            //myDeviceDao.deleteAll();
+
+            //Device d = new Device("TV Remote");
+            //myDeviceDao.insert(d);
+
             return null;
         }
     }

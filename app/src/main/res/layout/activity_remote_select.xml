@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RemoteSelectActivity">
+    tools:context=".activities.RemoteSelectActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -45,7 +45,7 @@
         android:layout_marginEnd="18dp"
         android:layout_marginRight="@dimen/big_padding"
         android:layout_marginBottom="@dimen/big_padding"
-        android:src="@drawable/ic_arrow_forward_black_24dp"
+        android:src="@drawable/ic_arrow_forward_white_24dp"
         app:backgroundTint="@color/colorAccent" />
 
     <android.support.design.widget.FloatingActionButton
@@ -59,7 +59,7 @@
         android:layout_marginEnd="18dp"
         android:layout_marginRight="@dimen/big_padding"
         android:layout_marginBottom="80dp"
-        android:src="@drawable/ic_add_black_24dp"
+        android:src="@drawable/ic_add_white_24dp"
         app:backgroundTint="@color/colorAccent" />
 
 </RelativeLayout>

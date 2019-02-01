@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DeviceActivity">
+    tools:context=".activities.DeviceSelectActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/big_padding"
+        android:layout_marginEnd="@dimen/big_padding"
+        android:layout_marginTop="60dp"
+        tools:listitem="@layout/recyclerview_item"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/big_padding"
+        android:layout_marginRight="@dimen/big_padding"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabNext"
@@ -17,7 +31,7 @@
         android:layout_marginEnd="18dp"
         android:layout_marginRight="@dimen/big_padding"
         android:layout_marginBottom="@dimen/big_padding"
-        android:src="@drawable/ic_arrow_forward_black_24dp"
+        android:src="@drawable/ic_arrow_forward_white_24dp"
         app:backgroundTint="@color/colorAccent" />
 
     <android.support.design.widget.FloatingActionButton
@@ -31,7 +45,7 @@
         android:layout_marginEnd="18dp"
         android:layout_marginRight="@dimen/big_padding"
         android:layout_marginBottom="80dp"
-        android:src="@drawable/ic_add_black_24dp"
+        android:src="@drawable/ic_add_white_24dp"
         app:backgroundTint="@color/colorAccent" />
 
 </RelativeLayout>

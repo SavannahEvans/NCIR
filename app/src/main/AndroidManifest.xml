@@ -9,19 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DeviceActivity">
+        <activity
+            android:name=".activities.DeviceSelectActivity"
+            android:label="@string/title_activity_device_select">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".RemoteSelectActivity"
+            android:name=".activities.RemoteSelectActivity"
             android:label="@string/title_activity_remote_select"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".NewRemoteActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.NewRemoteActivity" />
+        <activity android:name=".activities.RemoteActivity" />
+        <activity android:name=".activities.NewDeviceActivity"></activity>
     </application>
 
 </manifest>

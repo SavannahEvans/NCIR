@@ -1,4 +1,4 @@
-package edu.msoe.ncir;
+package edu.msoe.ncir.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +9,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Does something
- */
+import edu.msoe.ncir.R;
+import edu.msoe.ncir.models.Remote;
+
 public class RemoteListAdapter extends RecyclerView.Adapter<RemoteListAdapter.RemoteViewHolder> {
 
     class RemoteViewHolder extends RecyclerView.ViewHolder {
@@ -26,7 +26,7 @@ public class RemoteListAdapter extends RecyclerView.Adapter<RemoteListAdapter.Re
     private final LayoutInflater myInflater;
     private List<Remote> myRemotes; // Cached copy of remotes
 
-    RemoteListAdapter(Context context) { myInflater = LayoutInflater.from(context); }
+    public RemoteListAdapter(Context context) { myInflater = LayoutInflater.from(context); }
 
     @Override
     public RemoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -45,7 +45,7 @@ public class RemoteListAdapter extends RecyclerView.Adapter<RemoteListAdapter.Re
         }
     }
 
-    void setRemotes(List<Remote> remotes){
+    public void setRemotes(List<Remote> remotes){
         myRemotes = remotes;
         notifyDataSetChanged();
     }

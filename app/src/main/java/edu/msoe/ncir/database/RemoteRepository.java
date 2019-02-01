@@ -1,10 +1,13 @@
-package edu.msoe.ncir;
+package edu.msoe.ncir.database;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.List;
+
+import edu.msoe.ncir.models.Remote;
 
 public class RemoteRepository {
 
@@ -21,6 +24,10 @@ public class RemoteRepository {
         return myRemotes;
     }
 
+    LiveData<List<Remote>> getAll(int deviceID) {
+        return myRemoteDao.getAll(deviceID);
+    }
+
     // Must call this on a non-UI thread or app will crash
     public void insert(Remote remote) {
         new insertAsyncTask(myRemoteDao).execute(remote);
@@ -35,6 +42,7 @@ public class RemoteRepository {
 
         @Override
         protected Void doInBackground(final Remote... params) {
+            Log.d("RemoteRepository", params[0].getName() + " added with device id " + params[0].getDeviceID());
             myAsyncTaskDao.insert(params[0]);
             return null;
         }
