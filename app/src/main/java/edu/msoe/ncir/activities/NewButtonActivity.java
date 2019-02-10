@@ -29,7 +29,8 @@ import edu.msoe.ncir.models.Signal;
 public class NewButtonActivity extends AppCompatActivity {
 
     private SignalViewModel mySignalViewModel;
-    public static final String EXTRA_REPLY = "com.example.android.name.REPLY";
+    public static final String EXTRA_REPLY_ID = "com.example.android.id.REPLY";
+    public static final String EXTRA_REPLY_NAME = "com.example.android.name.REPLY";
     private int deviceID;
 
     @Override
@@ -53,8 +54,12 @@ public class NewButtonActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent replyIntent = new Intent();
+
                 String name = adapter.getSelectedName();
-                replyIntent.putExtra(EXTRA_REPLY, name);
+                int id = adapter.getSelectedID();
+
+                replyIntent.putExtra(EXTRA_REPLY_ID, id);
+                replyIntent.putExtra(EXTRA_REPLY_NAME, name);
                 setResult(RESULT_OK, replyIntent);
                 finish();
             }

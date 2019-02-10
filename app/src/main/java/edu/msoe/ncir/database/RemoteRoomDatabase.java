@@ -71,7 +71,8 @@ public abstract class RemoteRoomDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(final Void... params) {
             // Comment these lines out to keep data from last execution.
-            /*myRemoteDao.deleteAll();
+            /*
+            myRemoteDao.deleteAll();
             myDeviceDao.deleteAll();
             myButtonDao.deleteAll();
             mySignalDao.deleteAll();

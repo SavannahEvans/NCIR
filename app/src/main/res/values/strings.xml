@@ -3,8 +3,14 @@
     <string name="title_activity_remote_select">Select Remote</string>
     <string name="title_activity_device_select">Select Device</string>
     <string name="title_activity_remote">Your Remote</string>
+    <string name="title_activity_add_remote">Add New Remote</string>
+    <string name="title_activity_add_device">Add New Device</string>
+    <string name="title_activity_add_signal">Add New Signal</string>
+    <string name="title_activity_add_button">Add New Button</string>
+
     <string name="hint_word">Enter New Name</string>
     <string name="button_save">Save</string>
     <string name="button_add">Add</string>
     <string name="empty_not_saved">Not saved since empty.</string>
+    <string name="add_button_error">Not saved, signalID error.</string>
 </resources>

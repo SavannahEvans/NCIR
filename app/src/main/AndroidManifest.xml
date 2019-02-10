@@ -24,10 +24,17 @@
         <activity
             android:name=".activities.RemoteActivity"
             android:label="@string/title_activity_remote" />
-        <activity android:name=".activities.NewDeviceActivity" />
-        <activity android:name=".activities.NewRemoteActivity" />
-        <activity android:name=".activities.NewButtonActivity" />
-        <activity android:name=".activities.NewSignalActivity"></activity>
+        <activity android:name=".activities.NewDeviceActivity"
+            android:label="@string/title_activity_add_device" />
+
+        <activity android:name=".activities.NewRemoteActivity"
+            android:label="@string/title_activity_add_remote" />
+
+        <activity android:name=".activities.NewButtonActivity"
+            android:label="@string/title_activity_add_button" />
+
+        <activity android:name=".activities.NewSignalActivity"
+            android:label="@string/title_activity_add_signal" />
     </application>
 
 </manifest>

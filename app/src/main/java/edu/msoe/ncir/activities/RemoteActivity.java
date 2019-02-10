@@ -116,8 +116,17 @@ public class RemoteActivity extends AppCompatActivity {
         }
 
         if (requestCode == NEW_BUTTON_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Button button = new Button(remoteID, data.getStringExtra(NewButtonActivity.EXTRA_REPLY));
-            myButtonViewModel.insert(button);
+            Button button = new Button(remoteID,
+                    data.getIntExtra(NewButtonActivity.EXTRA_REPLY_ID, -1),
+                    data.getStringExtra(NewButtonActivity.EXTRA_REPLY_NAME));
+            if(button.getSignalID() != -1) {
+                myButtonViewModel.insert(button);
+            } else {
+                Toast.makeText(
+                        getApplicationContext(),
+                        R.string.add_button_error,
+                        Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

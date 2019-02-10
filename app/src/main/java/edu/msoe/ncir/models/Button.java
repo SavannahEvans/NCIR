@@ -18,12 +18,9 @@ public class Button {
     @ColumnInfo(name = "name")
     private String name;
 
-    /*
-     * The index of this button on the device (not unique)
-     */
     @NonNull
-    @ColumnInfo(name = "device_index")
-    private int deviceIndex;
+    @ColumnInfo(name = "signal_id")
+    private int signalID;
 
     /*
      * The view index is the location on the remote grid where this button sits
@@ -36,8 +33,9 @@ public class Button {
     @ColumnInfo(name = "remote_id")
     private int remoteID;
 
-    public Button(@NonNull int remoteID, @NonNull String name) {
+    public Button(@NonNull int remoteID, @NonNull int signalID, @NonNull String name) {
         this.remoteID = remoteID;
+        this.signalID = signalID;
         this.name = name;
     }
 
@@ -59,12 +57,12 @@ public class Button {
         this.remoteID = id;
     }
 
-    public int getDeviceIndex() {
-        return this.deviceIndex;
+    public int getSignalID() {
+        return this.signalID;
     }
 
-    public void setDeviceIndex(int index) {
-        this.deviceIndex = index;
+    public void setSignalID(int id) {
+        this.signalID = id;
     }
 
     public int getViewIndex() {
