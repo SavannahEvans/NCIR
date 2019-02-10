@@ -30,8 +30,12 @@ public class RemoteSelectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remote_select);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        final RemoteListAdapter adapter = new RemoteListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         FloatingActionButton fabAdd = (FloatingActionButton) findViewById(R.id.fabAdd);
         fabAdd.setOnClickListener(new View.OnClickListener() {
@@ -48,14 +52,12 @@ public class RemoteSelectActivity extends AppCompatActivity {
         fabNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openRemote();
+                int remoteID = adapter.getSelectedID();
+                if(remoteID >= 0) {
+                    openRemote(remoteID);
+                }
             }
         });
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final RemoteListAdapter adapter = new RemoteListAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -72,9 +74,10 @@ public class RemoteSelectActivity extends AppCompatActivity {
         });
     }
 
-    public void openRemote() {
+    public void openRemote(int remoteID) {
         Intent intent = new Intent(this, RemoteActivity.class);
-        if(deviceID != -1) {
+        if(remoteID != -1) {
+            intent.putExtra("REMOTE_ID", remoteID);
             intent.putExtra("DEVICE_ID", deviceID);
             startActivity(intent);
         }

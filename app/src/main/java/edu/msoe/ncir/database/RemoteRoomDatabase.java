@@ -10,14 +10,18 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import edu.msoe.ncir.models.Button;
 import edu.msoe.ncir.models.Device;
 import edu.msoe.ncir.models.Remote;
+import edu.msoe.ncir.models.Signal;
 
-@Database(entities = {Remote.class, Device.class}, version = 1, exportSchema = false)
+@Database(entities = {Remote.class, Device.class, Button.class, Signal.class}, version = 1, exportSchema = false)
 public abstract class RemoteRoomDatabase extends RoomDatabase {
 
     public abstract RemoteDao remoteDao();
     public abstract DeviceDao deviceDao();
+    public abstract ButtonDao buttonDao();
+    public abstract SignalDao signalDao();
 
     private static volatile RemoteRoomDatabase INSTANCE;
 
@@ -50,10 +54,14 @@ public abstract class RemoteRoomDatabase extends RoomDatabase {
 
         private final RemoteDao myRemoteDao;
         private final DeviceDao myDeviceDao;
+        private final ButtonDao myButtonDao;
+        private final SignalDao mySignalDao;
 
         PopulateDbAsync(RemoteRoomDatabase db) {
             myRemoteDao = db.remoteDao();
             myDeviceDao = db.deviceDao();
+            myButtonDao = db.buttonDao();
+            mySignalDao = db.signalDao();
         }
 
         /**
@@ -62,8 +70,12 @@ public abstract class RemoteRoomDatabase extends RoomDatabase {
          */
         @Override
         protected Void doInBackground(final Void... params) {
-            //myRemoteDao.deleteAll();
-            //myDeviceDao.deleteAll();
+            // Comment these lines out to keep data from last execution.
+            /*myRemoteDao.deleteAll();
+            myDeviceDao.deleteAll();
+            myButtonDao.deleteAll();
+            mySignalDao.deleteAll();
+            */
 
             //Device d = new Device("TV Remote");
             //myDeviceDao.insert(d);

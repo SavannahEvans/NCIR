@@ -12,7 +12,7 @@ import android.widget.EditText;
 import edu.msoe.ncir.R;
 
 public class NewRemoteActivity extends AppCompatActivity {
-    public static final String EXTRA_REPLY = "com.example.android.wordlistsql.REPLY";
+    public static final String EXTRA_REPLY = "com.example.android.name.REPLY";
 
     private EditText myEditNameView;
 

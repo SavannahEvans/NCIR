@@ -1,7 +1,9 @@
 package edu.msoe.ncir.adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +16,27 @@ import edu.msoe.ncir.models.Remote;
 
 public class RemoteListAdapter extends RecyclerView.Adapter<RemoteListAdapter.RemoteViewHolder> {
 
+    private int selectedPosition = -1;
+
     class RemoteViewHolder extends RecyclerView.ViewHolder {
         private final TextView remoteItemView;
 
         private RemoteViewHolder(View itemView) {
             super(itemView);
             remoteItemView = itemView.findViewById(R.id.textView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if (selectedPosition == pos) {
+                        selectedPosition = -1;
+                    } else {
+                        selectedPosition = pos;
+                    }
+                    notifyDataSetChanged();
+                }
+            });
         }
     }
 
@@ -39,6 +56,15 @@ public class RemoteListAdapter extends RecyclerView.Adapter<RemoteListAdapter.Re
         if (myRemotes != null) {
             Remote current = myRemotes.get(position);
             holder.remoteItemView.setText(current.getName());
+            if(selectedPosition == position) {
+                // This is the selected item
+                holder.remoteItemView.setBackgroundColor(ContextCompat
+                        .getColor(holder.remoteItemView.getContext(), R.color.colorSecondaryDark));
+            } else {
+                // This is an unselected item
+                holder.remoteItemView.setBackgroundColor(ContextCompat
+                        .getColor(holder.remoteItemView.getContext(), R.color.colorSecondary));
+            }
         } else {
             // Covers the case of data not being ready yet.
             holder.remoteItemView.setText("No Remotes");
@@ -55,5 +81,14 @@ public class RemoteListAdapter extends RecyclerView.Adapter<RemoteListAdapter.Re
         if (myRemotes != null)
             return myRemotes.size();
         else return 0;
+    }
+
+    public int getSelectedID() {
+        if(selectedPosition >= 0 && selectedPosition < getItemCount()) {
+            Remote current = myRemotes.get(selectedPosition);
+            Log.d("RemoteListAdapter", "id is " + current.getId() +", name is " + current.getName());
+            return current.getId();
+        }
+        return -1;
     }
 }

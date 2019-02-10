@@ -20,11 +20,14 @@
         </activity>
         <activity
             android:name=".activities.RemoteSelectActivity"
-            android:label="@string/title_activity_remote_select"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_remote_select" />
+        <activity
+            android:name=".activities.RemoteActivity"
+            android:label="@string/title_activity_remote" />
+        <activity android:name=".activities.NewDeviceActivity" />
         <activity android:name=".activities.NewRemoteActivity" />
-        <activity android:name=".activities.RemoteActivity" />
-        <activity android:name=".activities.NewDeviceActivity"></activity>
+        <activity android:name=".activities.NewButtonActivity" />
+        <activity android:name=".activities.NewSignalActivity"></activity>
     </application>
 
 </manifest>

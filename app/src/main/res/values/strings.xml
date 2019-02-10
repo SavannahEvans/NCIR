@@ -2,7 +2,9 @@
     <string name="app_name">NCIR</string>
     <string name="title_activity_remote_select">Select Remote</string>
     <string name="title_activity_device_select">Select Device</string>
+    <string name="title_activity_remote">Your Remote</string>
     <string name="hint_word">Enter New Name</string>
     <string name="button_save">Save</string>
+    <string name="button_add">Add</string>
     <string name="empty_not_saved">Not saved since empty.</string>
 </resources>
