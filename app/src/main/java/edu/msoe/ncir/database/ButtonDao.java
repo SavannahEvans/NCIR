@@ -8,7 +8,6 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import edu.msoe.ncir.models.Button;
-import edu.msoe.ncir.models.Device;
 
 /**
  * DAO stands for data access object, this is where all SQL queries are built.

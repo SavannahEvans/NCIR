@@ -3,7 +3,6 @@ package edu.msoe.ncir.database;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
-import android.text.Spanned;
 import android.util.Log;
 
 import java.util.List;

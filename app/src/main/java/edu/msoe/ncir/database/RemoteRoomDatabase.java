@@ -1,6 +1,5 @@
 package edu.msoe.ncir.database;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
@@ -8,7 +7,6 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import edu.msoe.ncir.models.Button;
 import edu.msoe.ncir.models.Device;

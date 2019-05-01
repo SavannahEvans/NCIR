@@ -3,34 +3,24 @@ package edu.msoe.ncir.activities;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Collections;
 import java.util.List;
 
 import edu.msoe.ncir.R;
 import edu.msoe.ncir.adapters.ButtonListAdapter;
-import edu.msoe.ncir.adapters.RemoteListAdapter;
 import edu.msoe.ncir.adapters.SignalListAdapter;
 import edu.msoe.ncir.database.ButtonViewModel;
-import edu.msoe.ncir.database.RemoteViewModel;
 import edu.msoe.ncir.database.SignalViewModel;
-import edu.msoe.ncir.helper.ItemTouchHelperCallback;
 import edu.msoe.ncir.models.Button;
-import edu.msoe.ncir.models.Remote;
 import edu.msoe.ncir.models.Signal;
 
 /**
