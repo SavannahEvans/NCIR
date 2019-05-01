@@ -7,10 +7,16 @@
     <string name="title_activity_add_device">Add New Device</string>
     <string name="title_activity_add_signal">Add New Signal</string>
     <string name="title_activity_add_button">Add New Button</string>
+    <string name="title_activity_new_signal_wait">Add New Signal</string>
 
-    <string name="hint_word">Enter New Name</string>
+    <string name="hint_name">Enter New Name</string>
+    <string name="hint_ipaddr">Enter IP Address</string>
     <string name="button_save">Save</string>
     <string name="button_add">Add</string>
+    <string name="button_continue">Continue</string>
     <string name="empty_not_saved">Not saved since empty.</string>
     <string name="add_button_error">Not saved, signalID error.</string>
+
+    <string name="add_signal_directions">Program a IR signal with your device now.
+        Make sure the device has clear line of sight with your remote.</string>
 </resources>

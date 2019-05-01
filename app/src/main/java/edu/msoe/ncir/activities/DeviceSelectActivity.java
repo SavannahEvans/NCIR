@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -18,6 +19,7 @@ import edu.msoe.ncir.R;
 import edu.msoe.ncir.adapters.DeviceListAdapter;
 import edu.msoe.ncir.database.DeviceViewModel;
 import edu.msoe.ncir.models.Device;
+import edu.msoe.ncir.udp.UDPClient;
 
 /**
  * Activity for selecting a device to connect to.
@@ -42,8 +44,17 @@ public class DeviceSelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int deviceID = adapter.getSelectedID();
-                if(deviceID >= 0) {
+                String ipaddr = adapter.getSelectedIpaddr();
+                if(deviceID >= 0 && ipaddr.length() > 0) {
+                    // TODO: Fix next line of code so doesn't crash!
+                    Log.d("ipaddr: ", ipaddr);
+                    UDPClient.getInstance().buildConnection(ipaddr, 44444);
                     openRemoteSelect(deviceID);
+                } else {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Cannot make the connection. Retry.",
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -80,7 +91,9 @@ public class DeviceSelectActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_DEVICE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Device device = new Device(data.getStringExtra(NewRemoteActivity.EXTRA_REPLY));
+            String name = data.getStringExtra(NewDeviceActivity.EXTRA_NAME);
+            String ipaddr = data.getStringExtra(NewDeviceActivity.EXTRA_IPADDR);
+            Device device = new Device(name, ipaddr);
             myDeviceViewModel.insert(device);
         } else {
             Toast.makeText(

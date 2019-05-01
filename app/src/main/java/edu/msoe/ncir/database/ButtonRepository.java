@@ -3,6 +3,7 @@ package edu.msoe.ncir.database;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+import android.text.Spanned;
 import android.util.Log;
 
 import java.util.List;
@@ -48,4 +49,23 @@ public class ButtonRepository {
             return null;
         }
     }
+
+//    private void reorderData(int remoteID) {
+//        AsyncTask<String, Void, Spanned> task = new AsyncTask<String, Void, Spanned>() {
+//            @Override
+//            protected Spanned doInBackground(String... strings) {
+//                db.deleteButtons()
+//                for (int i = getAll(remoteID).size() - 1; i >= 0; i--) {
+//                    Segnalibro s = mAdapter.getCapitolos().get(i);
+//                    database.saveData(s.getIdCapitolo(), s.getVersetto());
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Spanned spanned) {
+//            }
+//        };
+//        task.execute();
+//    }
 }

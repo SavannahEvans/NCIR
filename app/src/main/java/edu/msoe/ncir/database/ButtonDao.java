@@ -26,9 +26,9 @@ public interface ButtonDao {
     @Query("SELECT * from button_table ORDER BY name ASC")
     LiveData<List<Button>> getAll();
 
-    @Query("SELECT * from button_table WHERE remote_id LIKE :remoteID ORDER BY id ASC")
+    @Query("SELECT * from button_table WHERE remote_id = :remoteID ORDER BY view_index ASC")
     LiveData<List<Button>> getAll(int remoteID);
 
-    @Query("SELECT * from button_table WHERE id LIKE :buttonID")
+    @Query("SELECT * from button_table WHERE id = :buttonID")
     LiveData<Button> get(int buttonID);
 }

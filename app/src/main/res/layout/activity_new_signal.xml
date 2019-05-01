@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="@string/hint_word"
+        android:hint="@string/hint_name"
         android:inputType="textAutoComplete"
         android:padding="@dimen/small_padding"
         android:textSize="18sp"
@@ -21,12 +21,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_save"
+        android:id="@+id/button_continue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@color/colorAccent"
-        android:text="@string/button_save"
+        android:text="@string/button_continue"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

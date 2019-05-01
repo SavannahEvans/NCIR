@@ -15,8 +15,12 @@ public class Device {
     @ColumnInfo(name = "name")
     private String name;
 
-    public Device(@NonNull String name) {
+    @ColumnInfo(name = "ipaddr")
+    private String ipaddr;
+
+    public Device(@NonNull String name, @NonNull String ipaddr) {
         this.name = name;
+        this.ipaddr = ipaddr;
     }
 
     public void setName(String name) {
@@ -34,5 +38,13 @@ public class Device {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getIpaddr() {
+        return this.ipaddr;
+    }
+
+    public void setIpaddr(String ipaddr) {
+        this.ipaddr = ipaddr;
     }
 }

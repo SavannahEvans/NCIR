@@ -24,6 +24,10 @@ public class DeviceRepository {
         return myDevices;
     }
 
+    LiveData<Device> getDevice(int id) {
+        return myDeviceDao.get(id);
+    }
+
     // Must call this on a non-UI thread or app will crash
     public void insert(Device Device) {
         new insertAsyncTask(myDeviceDao).execute(Device);

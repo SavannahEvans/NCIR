@@ -8,24 +8,36 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".activities.NewDeviceActivity">
 
-<EditText
-    android:id="@+id/edit_name"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:fontFamily="sans-serif-light"
-    android:hint="@string/hint_word"
-    android:inputType="textAutoComplete"
-    android:padding="@dimen/small_padding"
-    android:layout_marginBottom="@dimen/big_padding"
-    android:layout_marginTop="@dimen/big_padding"
-    android:textSize="18sp" />
+    <EditText
+        android:id="@+id/edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/big_padding"
+        android:layout_marginBottom="@dimen/big_padding"
+        android:hint="@string/hint_name"
+        android:inputType="textAutoComplete"
+        android:padding="@dimen/small_padding"
+        android:textSize="18sp"
+        app:fontFamily="sans-serif-light" />
 
-<Button
-    android:id="@+id/button_save"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorAccent"
-    android:text="@string/button_save"
-    android:textColor="@android:color/white" />
+    <EditText
+        android:id="@+id/edit_ipaddr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/big_padding"
+        android:layout_marginBottom="@dimen/big_padding"
+        android:hint="@string/hint_ipaddr"
+        android:inputType="textAutoComplete"
+        android:padding="@dimen/small_padding"
+        android:textSize="18sp"
+        app:fontFamily="sans-serif-light" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:text="@string/button_save"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

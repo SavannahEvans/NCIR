@@ -3,6 +3,8 @@ package edu.msoe.ncir.database;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.os.AsyncTask;
+import android.text.Spanned;
 
 import java.util.List;
 
@@ -33,5 +35,9 @@ public class ButtonViewModel extends AndroidViewModel {
 
     public void insert(Button button) {
         myRepository.insert(button);
+    }
+
+    public void reorderData(int remoteID) {
+        //myRepository.reorderData(remoteID);
     }
 }

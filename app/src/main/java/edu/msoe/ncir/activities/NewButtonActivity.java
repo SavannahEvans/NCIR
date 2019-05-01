@@ -13,19 +13,25 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Collections;
 import java.util.List;
 
 import edu.msoe.ncir.R;
 
 import edu.msoe.ncir.adapters.SignalListAdapter;
 import edu.msoe.ncir.database.SignalViewModel;
+import edu.msoe.ncir.helper.ItemTouchHelperCallback;
 import edu.msoe.ncir.models.Signal;
 
+/**
+ * Add a new button to the current remote
+ */
 public class NewButtonActivity extends AppCompatActivity {
 
     private SignalViewModel mySignalViewModel;

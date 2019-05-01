@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.msoe.ncir">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +11,26 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.DeviceSelectActivity"
-            android:label="@string/title_activity_device_select">
+            android:label="@string/title_activity_device_select"></activity>
+        <activity
+            android:name=".activities.RemoteSelectActivity"
+            android:label="@string/title_activity_remote_select" />
+        <activity
+            android:name=".activities.RemoteActivity"
+            android:label="@string/title_activity_remote" />
+        <activity
+            android:name=".activities.NewDeviceActivity"
+            android:label="@string/title_activity_add_device" />
+        <activity
+            android:name=".activities.NewRemoteActivity"
+            android:label="@string/title_activity_add_remote" />
+        <activity
+            android:name=".activities.NewButtonActivity"
+            android:label="@string/title_activity_add_button" />
+        <activity
+            android:name=".activities.NewSignalActivity"
+            android:label="@string/title_activity_add_signal" />
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,22 +38,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.RemoteSelectActivity"
-            android:label="@string/title_activity_remote_select" />
-        <activity
-            android:name=".activities.RemoteActivity"
-            android:label="@string/title_activity_remote" />
-        <activity android:name=".activities.NewDeviceActivity"
-            android:label="@string/title_activity_add_device" />
+            android:name=".activities.NewSignalWaitActivity"
+            android:label="@string/title_activity_new_signal_wait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name=".activities.NewRemoteActivity"
-            android:label="@string/title_activity_add_remote" />
-
-        <activity android:name=".activities.NewButtonActivity"
-            android:label="@string/title_activity_add_button" />
-
-        <activity android:name=".activities.NewSignalActivity"
-            android:label="@string/title_activity_add_signal" />
     </application>
-
 </manifest>

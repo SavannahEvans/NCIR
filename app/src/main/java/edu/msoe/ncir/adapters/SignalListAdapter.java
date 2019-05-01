@@ -76,6 +76,10 @@ public class SignalListAdapter extends RecyclerView.Adapter<SignalListAdapter.Si
         notifyDataSetChanged();
     }
 
+    public List<Signal> getSignals(){
+        return mySignals;
+    }
+
     @Override
     public int getItemCount() {
         if (mySignals != null)

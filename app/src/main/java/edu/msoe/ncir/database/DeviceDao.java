@@ -24,9 +24,9 @@ public interface DeviceDao {
     @Query("SELECT * from device_table ORDER BY name ASC")
     LiveData<List<Device>> getAll();
 
-    @Query("SELECT * from device_table WHERE id LIKE :deviceID")
+    @Query("SELECT * from device_table WHERE id = :deviceID")
     LiveData<Device> get(int deviceID);
 
-    @Query("SELECT * from device_table WHERE name LIKE :deviceName")
+    @Query("SELECT * from device_table WHERE name = :deviceName")
     LiveData<Device> get(String deviceName);
 }

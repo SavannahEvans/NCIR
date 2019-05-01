@@ -96,4 +96,12 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
         }
         return -1;
     }
+
+    public String getSelectedIpaddr() {
+        if(selectedPosition >= 0 && selectedPosition < getItemCount()) {
+            Device current = myDevices.get(selectedPosition);
+            return current.getIpaddr();
+        }
+        return "";
+    }
 }

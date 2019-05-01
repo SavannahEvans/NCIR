@@ -1,5 +1,6 @@
 package edu.msoe.ncir.activities;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -10,24 +11,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
 
 import edu.msoe.ncir.R;
+import edu.msoe.ncir.database.DeviceViewModel;
+import edu.msoe.ncir.models.Device;
 import edu.msoe.ncir.models.Remote;
 import edu.msoe.ncir.adapters.RemoteListAdapter;
 import edu.msoe.ncir.database.RemoteViewModel;
+import edu.msoe.ncir.udp.UDPClient;
 
 public class RemoteSelectActivity extends AppCompatActivity {
 
     private RemoteViewModel myRemoteViewModel;
+    private DeviceViewModel myDeviceViewModel;
     public static final int NEW_REMOTE_ACTIVITY_REQUEST_CODE = 1;
     private int deviceID = -1;
+    private boolean connected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        connected = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remote_select);
 
@@ -53,7 +61,7 @@ public class RemoteSelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int remoteID = adapter.getSelectedID();
-                if(remoteID >= 0) {
+                if (remoteID >= 0) {
                     openRemote(remoteID);
                 }
             }

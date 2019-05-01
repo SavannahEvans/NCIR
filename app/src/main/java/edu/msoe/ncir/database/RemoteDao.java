@@ -25,9 +25,9 @@ public interface RemoteDao {
     @Query("SELECT * from remote_table ORDER BY name ASC")
     LiveData<List<Remote>> getAll();
 
-    @Query("SELECT * from remote_table WHERE device_id LIKE :deviceID ORDER BY name ASC")
+    @Query("SELECT * from remote_table WHERE device_id = :deviceID ORDER BY name ASC")
     LiveData<List<Remote>> getAll(int deviceID);
 
-    @Query("SELECT * from remote_table WHERE id LIKE :remoteID")
+    @Query("SELECT * from remote_table WHERE id = :remoteID")
     LiveData<Remote> get(int remoteID);
 }

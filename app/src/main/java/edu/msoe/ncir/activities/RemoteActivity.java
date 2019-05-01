@@ -3,6 +3,7 @@ package edu.msoe.ncir.activities;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +11,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Collections;
 import java.util.List;
 
 import edu.msoe.ncir.R;
@@ -23,6 +28,7 @@ import edu.msoe.ncir.adapters.SignalListAdapter;
 import edu.msoe.ncir.database.ButtonViewModel;
 import edu.msoe.ncir.database.RemoteViewModel;
 import edu.msoe.ncir.database.SignalViewModel;
+import edu.msoe.ncir.helper.ItemTouchHelperCallback;
 import edu.msoe.ncir.models.Button;
 import edu.msoe.ncir.models.Remote;
 import edu.msoe.ncir.models.Signal;
@@ -47,11 +53,13 @@ public class RemoteActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final ButtonListAdapter adapter = new ButtonListAdapter(this);
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         final SignalListAdapter signalAdapter = new SignalListAdapter(this);
 
+        // The remote and device ID's passed from previous activities
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             remoteID = extras.getInt("REMOTE_ID");
@@ -59,9 +67,6 @@ public class RemoteActivity extends AppCompatActivity {
         } else {
             finish();
         }
-
-        //TextView remoteIDView = findViewById(R.id.remoteIDView);
-        //remoteIDView.setText("The remote is: " + remoteID);
 
         FloatingActionButton fabAdd = (FloatingActionButton) findViewById(R.id.fabAdd);
         fabAdd.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +101,7 @@ public class RemoteActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable final List<Signal> signals) {
                 // Update the cached copy of buttons in adapter
+                adapter.setSignals(signals);
                 signalAdapter.setSignals(signals);
             }
         });
@@ -104,15 +110,23 @@ public class RemoteActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == NEW_SIGNAL_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-
-            Signal signal = new Signal(deviceID, data.getStringExtra(NewSignalActivity.EXTRA_REPLY));
-            mySignalViewModel.insert(signal);
-        } else if (requestCode == NEW_SIGNAL_ACTIVITY_REQUEST_CODE) {
-            Toast.makeText(
-                    getApplicationContext(),
-                    R.string.empty_not_saved,
-                    Toast.LENGTH_LONG).show();
+        if (requestCode == NEW_SIGNAL_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                String name = data.getStringExtra(NewSignalActivity.EXTRA_REPLY_NAME);
+                int index = data.getIntExtra(NewSignalActivity.EXTRA_REPLY_INDEX, -1);
+                Signal signal = new Signal(deviceID, name, index);
+                mySignalViewModel.insert(signal);
+                Toast.makeText(
+                        getApplicationContext(),
+                        "New signal saved.",
+                        Toast.LENGTH_LONG).show();
+                Log.d("Signal", name + " with index " + index);
+            } else {
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Error occurred, not saved.",
+                        Toast.LENGTH_LONG).show();
+            }
         }
 
         if (requestCode == NEW_BUTTON_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {

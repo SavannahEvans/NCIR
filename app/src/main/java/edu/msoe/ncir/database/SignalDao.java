@@ -25,9 +25,9 @@ public interface SignalDao {
     @Query("SELECT * from signal_table ORDER BY name ASC")
     LiveData<List<Signal>> getAll();
 
-    @Query("SELECT * from signal_table WHERE device_id LIKE :deviceID ORDER BY id ASC")
+    @Query("SELECT * from signal_table WHERE device_id = :deviceID ORDER BY id ASC")
     LiveData<List<Signal>> getAll(int deviceID);
 
-    @Query("SELECT * from signal_table WHERE id LIKE :signalID")
+    @Query("SELECT * from signal_table WHERE id = :signalID")
     LiveData<Signal> get(int signalID);
 }

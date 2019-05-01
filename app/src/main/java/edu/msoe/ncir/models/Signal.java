@@ -30,9 +30,10 @@ public class Signal {
     @ColumnInfo(name = "device_id")
     private int deviceID;
 
-    public Signal(@NonNull int deviceID, @NonNull String name) {
+    public Signal(@NonNull int deviceID, @NonNull String name, @NonNull int deviceIndex) {
         this.deviceID = deviceID;
         this.name = name;
+        this.deviceIndex = deviceIndex;
     }
 
     public void setName(String name) {
