@@ -16,7 +16,7 @@ public class UDPClient {
     /**
      * Constructs a UDP client for the device.
      */
-    protected UDPClient() {}
+    protected UDPClient() { }
 
     /**
      * Only allows the creation of one UDP Client
@@ -38,6 +38,7 @@ public class UDPClient {
         this.port = port;
         try {
             socket = new DatagramSocket();
+            socket.setSoTimeout(5000);
         } catch (SocketException e) {
             e.printStackTrace();
         }

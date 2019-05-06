@@ -7,16 +7,28 @@
     <string name="title_activity_add_device">Add New Device</string>
     <string name="title_activity_add_signal">Add New Signal</string>
     <string name="title_activity_add_button">Add New Button</string>
-    <string name="title_activity_new_signal_wait">Add New Signal</string>
+    <string name="title_activity_new_signal_wait">Program Signal</string>
+    <string name="title_activity_edit_activity">Edit Device</string>
+    <string name="title_activity_edit_activity_wait">Edit Device</string>
 
     <string name="hint_name">Enter New Name</string>
     <string name="hint_ipaddr">Enter IP Address</string>
+    <string name="hint_network">Enter Network Name/ID</string>
+    <string name="hint_password">Enter Password For Network</string>
+
     <string name="button_save">Save</string>
     <string name="button_add">Add</string>
     <string name="button_continue">Continue</string>
+    <string name="button_provision">Connect</string>
+
     <string name="empty_not_saved">Not saved since empty.</string>
     <string name="add_button_error">Not saved, signalID error.</string>
+    <string name="add_network_error">Incorrect credentials, please try again.</string>
+
 
     <string name="add_signal_directions">Program a IR signal with your device now.
         Make sure the device has clear line of sight with your remote.</string>
+    <string name="add_network_directions">Attempting to connect your device to the network.
+    This make take a moment.</string>
+    <string name="complete_network_directions">Please restart your NCIR device now.</string>
 </resources>

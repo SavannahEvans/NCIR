@@ -44,7 +44,7 @@ public class ButtonListAdapter extends RecyclerView.Adapter<ButtonListAdapter.Bu
                     if(index > -1 && name.length() > 0) {
                         boolean sent = sendButton(name, index);
                         if(sent) {
-                            Log.d("Buttons", "Button was sent and recieved.");
+                            Log.d("Buttons", "Button was sent and received.");
                         }
                         Log.d("Buttons", name +" "+index + " Button Pressed");
                     } else {
@@ -116,7 +116,6 @@ public class ButtonListAdapter extends RecyclerView.Adapter<ButtonListAdapter.Bu
     public int getSelectedID() {
         if(selectedPosition >= 0 && selectedPosition < getItemCount()) {
             Button current = myButtons.get(selectedPosition);
-            Log.d("ButtonListAdapter", "id is " + current.getId() +", name is " + current.getName());
             return current.getId();
         }
         return -1;
@@ -141,9 +140,7 @@ public class ButtonListAdapter extends RecyclerView.Adapter<ButtonListAdapter.Bu
                     i = mySignals.size();
                 }
             }
-            if(null == signal) {
-                Log.d("ButtonListAdapter", "Error finding signal.");
-            } else {
+            if(signal != null) {
                 return signal.getDeviceIndex();
             }
         }

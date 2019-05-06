@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.NewSignalWaitActivity">
+    tools:context=".activities.EditDeviceWaitActivity">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabBack"
@@ -28,7 +28,12 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:lineSpacingExtra="8sp"
-        android:text="@string/add_signal_directions"
-        android:textSize="18sp" />
+        android:text="@string/add_network_directions"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </RelativeLayout>

@@ -28,6 +28,7 @@ public class DeviceSelectActivity extends AppCompatActivity {
 
     private DeviceViewModel myDeviceViewModel;
     public static final int NEW_DEVICE_ACTIVITY_REQUEST_CODE = 1;
+    public static final int EDIT_DEVICE_ACTIVITY_REQUEST_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,21 @@ public class DeviceSelectActivity extends AppCompatActivity {
             }
         });
 
-
+        FloatingActionButton fabEdit = findViewById(R.id.fabEdit);
+        fabEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int deviceID = adapter.getSelectedID();
+                if(deviceID >= 0) {
+                    String name = myDeviceViewModel.getDevice(deviceID).getValue().getName();
+                    // Open the activity to add new connection
+                    Intent intent = new Intent(DeviceSelectActivity.this, EditDeviceActivity.class);
+                    intent.putExtra("DEVICE_NAME", name);
+                    intent.putExtra("DEVICE_ID", deviceID);
+                    startActivityForResult(intent, EDIT_DEVICE_ACTIVITY_REQUEST_CODE);
+                }
+            }
+        });
 
         myDeviceViewModel = ViewModelProviders.of(this).get(DeviceViewModel.class);
         myDeviceViewModel.getAllDevices().observe(this, new Observer<List<Device>>() {
@@ -95,6 +110,15 @@ public class DeviceSelectActivity extends AppCompatActivity {
             String ipaddr = data.getStringExtra(NewDeviceActivity.EXTRA_IPADDR);
             Device device = new Device(name, ipaddr);
             myDeviceViewModel.insert(device);
+        } else if(requestCode == EDIT_DEVICE_ACTIVITY_REQUEST_CODE) {
+            String ipaddr = data.getStringExtra(EditDeviceActivity.EXTRA_REPLY);
+            int deviceID = data.getIntExtra(EditDeviceActivity.EXTRA_REPLY_ID, -1);
+            if(deviceID != -1) {
+                Device device = myDeviceViewModel.getDevice(deviceID).getValue();
+                // TODO: change the ipaddr on the device (dont worry too much about this)
+            } else {
+                Log.d("Device Edit", "Error for a random reason!");
+            }
         } else {
             Toast.makeText(
                     getApplicationContext(),

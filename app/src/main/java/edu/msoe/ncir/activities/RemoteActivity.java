@@ -104,13 +104,19 @@ public class RemoteActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 String name = data.getStringExtra(NewSignalActivity.EXTRA_REPLY_NAME);
                 int index = data.getIntExtra(NewSignalActivity.EXTRA_REPLY_INDEX, -1);
-                Signal signal = new Signal(deviceID, name, index);
-                mySignalViewModel.insert(signal);
-                Toast.makeText(
-                        getApplicationContext(),
-                        "New signal saved.",
-                        Toast.LENGTH_LONG).show();
-                Log.d("Signal", name + " with index " + index);
+                if(index != -1) {
+                    Signal signal = new Signal(deviceID, name, index);
+                    mySignalViewModel.insert(signal);
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "New signal saved.",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Error occurred, not saved.",
+                            Toast.LENGTH_LONG).show();
+                }
             } else {
                 Toast.makeText(
                         getApplicationContext(),
