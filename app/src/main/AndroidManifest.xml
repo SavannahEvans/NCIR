@@ -44,10 +44,10 @@
             android:label="@string/title_activity_new_signal_wait" />
         <activity
             android:name=".activities.EditDeviceActivity"
-            android:lable="@string/title_activity_edit_activity"/>
+            android:label="@string/title_activity_edit_activity"/>
         <activity
             android:name=".activities.EditDeviceWaitActivity"
-            android:lable="@string/title_activity_edit_activity_wait"/>
+            android:label="@string/title_activity_edit_activity_wait"/>
     </application>
 
 </manifest>

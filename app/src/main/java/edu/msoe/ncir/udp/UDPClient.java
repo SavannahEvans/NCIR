@@ -33,20 +33,24 @@ public class UDPClient {
      * Constructs the UDP socket
      * @param ipaddr
      * @param port
+     * @return returns true if connection is successful
      */
-    public void buildConnection (String ipaddr, int port) {
+    public Boolean buildConnection (String ipaddr, int port) {
         this.port = port;
         try {
             socket = new DatagramSocket();
             socket.setSoTimeout(5000);
         } catch (SocketException e) {
             e.printStackTrace();
+            return false;
         }
         try {
             address = InetAddress.getByName(ipaddr);
         } catch (UnknownHostException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     /**

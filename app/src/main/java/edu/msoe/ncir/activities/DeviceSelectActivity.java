@@ -14,10 +14,13 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import edu.msoe.ncir.R;
 import edu.msoe.ncir.adapters.DeviceListAdapter;
 import edu.msoe.ncir.database.DeviceViewModel;
+import edu.msoe.ncir.database.SignalViewModel;
 import edu.msoe.ncir.models.Device;
 import edu.msoe.ncir.udp.UDPClient;
 
@@ -40,6 +43,15 @@ public class DeviceSelectActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        myDeviceViewModel = ViewModelProviders.of(this).get(DeviceViewModel.class);
+        myDeviceViewModel.getAllDevices().observe(this, new Observer<List<Device>>() {
+            @Override
+            public void onChanged(@Nullable final List<Device> devices) {
+                // Update the cached copy of devices in adapter
+                adapter.setDevices(devices);
+            }
+        });
+
         FloatingActionButton fabNext = findViewById(R.id.fabNext);
         fabNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +61,7 @@ public class DeviceSelectActivity extends AppCompatActivity {
                 if(deviceID >= 0 && ipaddr.length() > 0) {
                     // TODO: Fix next line of code so doesn't crash!
                     Log.d("ipaddr: ", ipaddr);
-                    UDPClient.getInstance().buildConnection(ipaddr, 44444);
+                    connectToDevice(ipaddr, deviceID);
                     openRemoteSelect(deviceID);
                 } else {
                     Toast.makeText(
@@ -76,27 +88,26 @@ public class DeviceSelectActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int deviceID = adapter.getSelectedID();
                 if(deviceID >= 0) {
-                    String name = myDeviceViewModel.getDevice(deviceID).getValue().getName();
-                    // Open the activity to add new connection
-                    Intent intent = new Intent(DeviceSelectActivity.this, EditDeviceActivity.class);
-                    intent.putExtra("DEVICE_NAME", name);
-                    intent.putExtra("DEVICE_ID", deviceID);
-                    startActivityForResult(intent, EDIT_DEVICE_ACTIVITY_REQUEST_CODE);
+                    Device device = myDeviceViewModel.getDevice(deviceID).getValue();
+                    if(device != null) {
+                        String name = device.getName();
+                        // Open the activity to add new connection
+                        Intent intent = new Intent(DeviceSelectActivity.this, EditDeviceActivity.class);
+                        intent.putExtra("DEVICE_NAME", name);
+                        intent.putExtra("DEVICE_ID", deviceID);
+                        startActivityForResult(intent, EDIT_DEVICE_ACTIVITY_REQUEST_CODE);
+                    } else {
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "Error",
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
-
-        myDeviceViewModel = ViewModelProviders.of(this).get(DeviceViewModel.class);
-        myDeviceViewModel.getAllDevices().observe(this, new Observer<List<Device>>() {
-            @Override
-            public void onChanged(@Nullable final List<Device> devices) {
-                // Update the cached copy of devices in adapter
-                adapter.setDevices(devices);
             }
         });
     }
 
-    public void openRemoteSelect(int deviceID) {
+    private void openRemoteSelect(int deviceID) {
         Intent intent = new Intent(this, RemoteSelectActivity.class);
         intent.putExtra("DEVICE_ID", deviceID);
         startActivity(intent);
@@ -115,7 +126,7 @@ public class DeviceSelectActivity extends AppCompatActivity {
             int deviceID = data.getIntExtra(EditDeviceActivity.EXTRA_REPLY_ID, -1);
             if(deviceID != -1) {
                 Device device = myDeviceViewModel.getDevice(deviceID).getValue();
-                // TODO: change the ipaddr on the device (dont worry too much about this)
+                device.setIpaddr(ipaddr);
             } else {
                 Log.d("Device Edit", "Error for a random reason!");
             }
@@ -124,6 +135,38 @@ public class DeviceSelectActivity extends AppCompatActivity {
                     getApplicationContext(),
                     R.string.empty_not_saved,
                     Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * Updates the specified device by pulling information from that device and updating the database
+     * @param deviceID
+     */
+    private void connectToDevice(String ipaddr, int deviceID) {
+        Boolean successful = UDPClient.getInstance().buildConnection(ipaddr, 44444);
+        if(successful) {
+            updateDevice(deviceID);
+        }
+    }
+
+    /**
+     * Recieves data in the format ‘[button_name],[button_index]\r\n’
+     * Updates the phone app to match the device
+     */
+    private void updateDevice(int deviceID) {
+        // Get items from the device
+        UDPClient.getInstance().send(("button_refresh")); // send refresh command
+        String response = UDPClient.getInstance().receive(); // wait for response (blocking)
+        Pattern pattern = Pattern.compile("(.*),(\\d+)");
+        Matcher matcher = pattern.matcher(response);
+        while (matcher.find( )) {
+            Log.d("Matcher found", (matcher.group(1) + " " + matcher.group(2)));
+
+            // Update the signals to match
+            SignalViewModel signalViewModel = ViewModelProviders.of(this).get(SignalViewModel.class);
+            int signalIndex = Integer.parseInt(matcher.group(2));
+            String signalName = matcher.group(1);
+            signalViewModel.update(deviceID, signalIndex, signalName);
         }
     }
 }

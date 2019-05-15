@@ -38,4 +38,31 @@ public class SignalViewModel extends AndroidViewModel {
     public void insert(Signal signal) {
         myRepository.insert(signal);
     }
+
+    /**
+     * This method is called when syncing with a device.
+     * It checks for new signals and adds then to the repository.
+     * It checks for existing signals and updates their ID.
+     * @param deviceID
+     * @param signalIndex
+     * @param signalName
+     */
+    public void update(int deviceID, int signalIndex, String signalName) {
+        List<Signal> signals = getSignals(deviceID).getValue();
+        if(signals != null) {
+            for (Signal signal : signals) {
+                if (signal.getName().equals(signalName)) {
+                    if (signal.getDeviceIndex() != signalIndex) {
+                        signal.setDeviceIndex(signalIndex);
+                    }
+                } else {
+                    Signal s = new Signal(deviceID, signalName, signalIndex);
+                    insert(s);
+                }
+            }
+        } else {
+            Signal s = new Signal(deviceID, signalName, signalIndex);
+            insert(s);
+        }
+    }
 }
